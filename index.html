@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>AJESA – Association des Jeunes Solidaires d'Amanikro</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --G:#1B6E3E;--G2:#2D9B5C;--GP:#E8F5EE;
+  --O:#E8A020;--OL:#FFC947;
+  --R:#B83225;
+  --N:#0C1A10;--N2:#162A1C;
+  --BG:#F4F1EB;--BG2:#E2DDD4;
+  --T:#1A2E1E;--TS:#5A7060;
+  --W:#FDFAF4;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--W);color:var(--T);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+::-webkit-scrollbar{width:5px}
+::-webkit-scrollbar-track{background:var(--N)}
+::-webkit-scrollbar-thumb{background:var(--O);border-radius:10px}
+
+/* NAV */
+#nav{position:fixed;top:0;left:0;right:0;z-index:900;display:flex;align-items:center;justify-content:space-between;padding:1rem 2.5rem;transition:all .35s}
+#nav.active{background:rgba(12,26,16,.96);backdrop-filter:blur(18px);padding:.7rem 2.5rem;box-shadow:0 2px 24px rgba(0,0,0,.35)}
+.nb{display:flex;align-items:center;gap:.8rem}
+.nb-name{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:700;color:#fff}
+.nb-name span{color:var(--O)}
+.nm{display:flex;align-items:center;gap:1.8rem;list-style:none}
+.nm a{color:rgba(255,255,255,.72);font-size:.85rem;font-weight:500;position:relative;transition:color .2s}
+.nm a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--O);transition:width .3s}
+.nm a:hover{color:#fff}.nm a:hover::after{width:100%}
+.n-cta{background:var(--O);color:var(--N);font-weight:700;font-size:.82rem;padding:.5rem 1.4rem;border-radius:100px;transition:all .2s}
+.n-cta:hover{background:var(--OL);transform:translateY(-2px)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:.3rem;background:none;border:none}
+.burger span{width:22px;height:2px;background:#fff;border-radius:2px}
+.mob{position:fixed;inset:0;z-index:850;background:var(--N);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2rem;transform:translateX(100%);transition:transform .4s cubic-bezier(.77,0,.18,1)}
+.mob.open{transform:translateX(0)}
+.mob a{color:#fff;font-size:1.4rem;font-weight:600;transition:color .2s}
+.mob a:hover{color:var(--O)}
+.mob-x{position:absolute;top:1.5rem;right:1.5rem;background:none;color:var(--O);font-size:2rem;cursor:pointer;border:none}
+@media(max-width:900px){.nm,.n-cta{display:none}.burger{display:flex}}
+
+/* HERO */
+#hero{min-height:100vh;background:var(--N);display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;overflow:hidden;padding:7rem 1.5rem 5rem;text-align:center}
+.orb{position:absolute;border-radius:50%;filter:blur(90px);animation:drift 10s ease-in-out infinite alternate}
+.oa{width:600px;height:600px;background:rgba(27,110,62,.28);top:-150px;left:-200px}
+.ob{width:450px;height:450px;background:rgba(232,160,32,.14);bottom:-100px;right:-100px;animation-delay:-4s}
+.oc{width:300px;height:300px;background:rgba(184,50,37,.1);top:40%;left:55%;animation-delay:-7s}
+.h-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);background-size:60px 60px}
+.hc{position:relative;z-index:2;max-width:820px}
+.h-pill{display:inline-flex;align-items:center;gap:.5rem;background:rgba(232,160,32,.15);border:1px solid rgba(232,160,32,.3);color:var(--O);font-size:.78rem;font-weight:600;letter-spacing:.15em;text-transform:uppercase;padding:.4rem 1.1rem;border-radius:100px;margin-bottom:2rem;animation:fadeUp .7s ease both}
+.h-logo{width:165px;height:165px;margin:0 auto 2rem;animation:fadeUp .7s .1s ease both}
+.h-logo svg{width:100%;height:100%;filter:drop-shadow(0 0 30px rgba(232,160,32,.45));animation:rotateSlow 20s linear infinite}
+.h-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.6rem,7vw,5rem);font-weight:700;color:#fff;line-height:1.06;margin-bottom:1.2rem;animation:fadeUp .7s .2s ease both}
+.gold{color:transparent;background:linear-gradient(90deg,var(--O),var(--OL),var(--O));background-size:200%;-webkit-background-clip:text;background-clip:text;animation:shimmer 3s linear infinite}
+.h-sub{font-size:clamp(.95rem,2vw,1.15rem);color:rgba(255,255,255,.6);max-width:560px;margin:0 auto 2.5rem;line-height:1.75;animation:fadeUp .7s .3s ease both}
+.h-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .7s .4s ease both}
+.btn-p{background:var(--O);color:var(--N);font-weight:700;padding:.85rem 2rem;border-radius:100px;font-size:.95rem;transition:all .25s;box-shadow:0 4px 20px rgba(232,160,32,.35)}
+.btn-p:hover{background:var(--OL);transform:translateY(-3px)}
+.btn-o{border:2px solid rgba(255,255,255,.28);color:#fff;font-weight:600;padding:.85rem 2rem;border-radius:100px;font-size:.95rem;transition:all .25s}
+.btn-o:hover{border-color:var(--O);background:rgba(232,160,32,.1);transform:translateY(-3px)}
+.h-stats{display:flex;gap:3rem;justify-content:center;flex-wrap:wrap;margin-top:4rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,.1);animation:fadeUp .7s .5s ease both}
+.stat .sn{font-family:'Cormorant Garamond',serif;font-size:2.4rem;font-weight:700;color:var(--O);display:block}
+.stat .sl{font-size:.72rem;color:rgba(255,255,255,.45);letter-spacing:.12em;text-transform:uppercase;margin-top:.2rem}
+.scroll-ind{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:.4rem;color:rgba(255,255,255,.3);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;animation:bounce 2s ease-in-out infinite;z-index:2}
+.scroll-ind::after{content:'';width:1px;height:45px;background:linear-gradient(to bottom,rgba(232,160,32,.6),transparent)}
+
+/* COMMONS */
+.sec{padding:6rem 1.5rem}
+.cont{max-width:1100px;margin:0 auto}
+.lbl{font-size:.72rem;font-weight:700;letter-spacing:.25em;text-transform:uppercase;color:var(--O);margin-bottom:.5rem;display:flex;align-items:center;gap:.6rem}
+.lbl::before{content:'';width:22px;height:2px;background:var(--O)}
+.ttl{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,4vw,3rem);font-weight:700;line-height:1.15;margin-bottom:.8rem}
+.desc{color:var(--TS);line-height:1.75;max-width:560px;font-size:.96rem}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .7s,transform .7s}
+.revL{opacity:0;transform:translateX(-36px);transition:opacity .7s,transform .7s}
+.revR{opacity:0;transform:translateX(36px);transition:opacity .7s,transform .7s}
+.on{opacity:1!important;transform:none!important}
+.d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}.d5{transition-delay:.5s}
+
+/* PRÉSENTATION */
+#presentation{background:var(--W)}
+.ab-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+@media(max-width:768px){.ab-grid{grid-template-columns:1fr;gap:2rem}}
+.ab-vis{background:linear-gradient(135deg,var(--G),var(--N2));border-radius:24px;padding:3rem 2rem;text-align:center;position:relative;overflow:hidden}
+.ab-vis svg{width:130px;height:130px;position:relative;z-index:1;filter:drop-shadow(0 8px 24px rgba(0,0,0,.3))}
+.ab-vis-t{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:#fff;margin-top:1.2rem}
+.ab-vis-s{color:rgba(255,255,255,.6);font-size:.85rem;margin-top:.4rem}
+.val-list{display:flex;flex-direction:column;gap:1rem;margin-top:2rem}
+.vi{display:flex;gap:1rem;align-items:flex-start;padding:1.2rem;border-radius:12px;background:#fff;border-left:4px solid var(--G);box-shadow:0 4px 18px rgba(0,0,0,.06);transition:transform .25s}
+.vi:hover{transform:translateX(5px)}
+.vi-ic{font-size:1.5rem;flex-shrink:0;margin-top:.1rem}
+.vi h4{font-size:.95rem;font-weight:700;color:var(--G);margin-bottom:.2rem}
+.vi p{font-size:.83rem;color:var(--TS);line-height:1.6}
+
+/* STRUCTURE */
+#structure{background:var(--N);color:#fff}
+.bureau-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:1.2rem;margin-bottom:3rem}
+.bc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:1.8rem 1.2rem;text-align:center;position:relative;overflow:hidden;transition:all .3s}
+.bc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--G),var(--O))}
+.bc:hover{transform:translateY(-5px);background:rgba(255,255,255,.1)}
+.bc-av{width:62px;height:62px;border-radius:50%;background:linear-gradient(135deg,var(--G),var(--O));margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:1.7rem}
+.bc-role{font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--O);margin-bottom:.3rem}
+.bc-name{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:700;color:#fff;margin-bottom:.2rem}
+.bc-info{font-size:.75rem;color:rgba(255,255,255,.4);font-style:italic}
+.com-ttl{font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--O);margin-bottom:1.2rem;display:flex;align-items:center;gap:.5rem}
+.com-ttl::before{content:'';width:18px;height:2px;background:var(--O)}
+.com-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:1rem}
+.cc{background:rgba(27,110,62,.2);border:1px solid rgba(27,110,62,.45);border-radius:12px;padding:1.2rem;display:flex;gap:.8rem;align-items:flex-start;transition:all .25s}
+.cc:hover{background:rgba(27,110,62,.35);transform:translateY(-3px)}
+.cc-ic{font-size:1.5rem;flex-shrink:0}
+.cc h4{font-size:.88rem;font-weight:700;color:var(--O);margin-bottom:.25rem}
+.cc p{font-size:.76rem;color:rgba(255,255,255,.5);line-height:1.55}
+
+/* MEMBRES */
+#membres{background:var(--BG)}
+.mbr-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:2.5rem}
+.mbr-cnt{background:var(--G);color:#fff;font-weight:700;font-size:.85rem;padding:.5rem 1.2rem;border-radius:100px}
+.mbr-srch{padding:.7rem 1rem;border:2px solid var(--BG2);border-radius:10px;font-family:'Outfit',sans-serif;font-size:.9rem;width:240px;outline:none;transition:border .2s}
+.mbr-srch:focus{border-color:var(--G)}
+.tbl-wrap{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 32px rgba(0,0,0,.1)}
+table{width:100%;border-collapse:collapse}
+thead{background:linear-gradient(90deg,var(--G),var(--N2))}
+thead th{color:#fff;font-size:.78rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:1rem 1.2rem;text-align:left}
+tbody tr{border-bottom:1px solid var(--BG2);transition:background .2s}
+tbody tr:hover{background:var(--GP)}
+tbody td{padding:.9rem 1.2rem;font-size:.88rem;color:var(--T)}
+.badge{display:inline-block;padding:.2rem .65rem;border-radius:100px;font-size:.7rem;font-weight:700}
+.b-actif{background:var(--GP);color:var(--G)}
+.b-fond{background:rgba(232,160,32,.15);color:#9a6a00}
+.mbr-btn{background:var(--O);color:var(--N);font-weight:700;font-size:.85rem;padding:.6rem 1.4rem;border-radius:100px;border:none;cursor:pointer;transition:all .2s}
+.mbr-btn:hover{background:var(--OL)}
+
+/* PROJETS */
+#projets{background:var(--W)}
+.proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:1.5rem}
+.pc{background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 6px 28px rgba(0,0,0,.08);transition:all .3s}
+.pc:hover{transform:translateY(-7px);box-shadow:0 14px 50px rgba(0,0,0,.13)}
+.ph{padding:2rem;position:relative;overflow:hidden}
+.ph1{background:linear-gradient(135deg,#1B6E3E,#0f4a28)}
+.ph2{background:linear-gradient(135deg,#E8A020,#c07010)}
+.ph3{background:linear-gradient(135deg,#B83225,#8a2319)}
+.ph4{background:linear-gradient(135deg,#1a6b9a,#0d4a6e)}
+.ph5{background:linear-gradient(135deg,#7a3d9e,#522a6c)}
+.ph6{background:linear-gradient(135deg,#1B6E3E,#E8A020)}
+.ph-ic{font-size:2.8rem;position:relative;z-index:1}
+.ph-deco{position:absolute;bottom:-20px;right:-20px;width:90px;height:90px;border-radius:50%;background:rgba(255,255,255,.1)}
+.pb{padding:1.5rem}
+.ptag{display:inline-block;background:var(--GP);color:var(--G);font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .65rem;border-radius:100px;margin-bottom:.7rem}
+.pb h3{font-size:1.02rem;font-weight:700;margin-bottom:.45rem;color:var(--T)}
+.pb p{font-size:.83rem;color:var(--TS);line-height:1.65;margin-bottom:1rem}
+.pf{display:flex;justify-content:space-between;align-items:center}
+.pst{font-size:.75rem;font-weight:600;color:var(--O);display:flex;align-items:center;gap:.35rem}
+.pst::before{content:'';width:7px;height:7px;background:var(--O);border-radius:50%;animation:pulse 1.5s infinite}
+
+/* CONTACT */
+#contact{background:var(--BG)}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+@media(max-width:768px){.ct-grid{grid-template-columns:1fr}}
+.ct-info{display:flex;flex-direction:column;gap:1rem}
+.cti{display:flex;gap:1rem;align-items:center;padding:1.2rem;border-radius:12px;background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.06);transition:transform .2s}
+.cti:hover{transform:translateX(5px)}
+.cti-ic{width:46px;height:46px;border-radius:12px;background:var(--GP);display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.cti-ic.wa{background:#e7ffe9}.cti-ic.em{background:#fff7e7}.cti-ic.fb{background:#e7f0ff}.cti-ic.tk{background:#ffe7f0}
+.cti h4{font-size:.8rem;font-weight:700;color:var(--G);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.2rem}
+.cti p,.cti a{font-size:.9rem;color:var(--T)}
+.cti a{color:var(--G);font-weight:600}.cti a:hover{color:var(--O)}
+.cti small{font-size:.75rem;color:var(--TS);font-style:italic}
+.soc-row{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:.5rem}
+.sb{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1rem;border-radius:8px;font-size:.82rem;font-weight:600;transition:all .2s;border:none;cursor:pointer;text-decoration:none}
+.sb-wa{background:#25D366;color:#fff}.sb-wa:hover{background:#1da851}
+.sb-em{background:var(--G);color:#fff}.sb-em:hover{background:var(--G2)}
+.sb-fb{background:#1877F2;color:#fff}.sb-fb:hover{background:#1565c0}
+.sb-tk{background:#010101;color:#fff}.sb-tk:hover{background:#333}
+.ct-form{background:#fff;border-radius:20px;padding:2rem;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.ct-form h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;color:var(--T);margin-bottom:1.5rem}
+.fg{margin-bottom:1.1rem}
+.fg label{display:block;font-size:.8rem;font-weight:600;color:var(--G);margin-bottom:.4rem}
+.fg input,.fg textarea,.fg select{width:100%;padding:.75rem 1rem;border:2px solid var(--BG2);border-radius:10px;font-family:'Outfit',sans-serif;font-size:.9rem;color:var(--T);outline:none;transition:all .2s;background:#fff}
+.fg input:focus,.fg textarea:focus,.fg select:focus{border-color:var(--G);box-shadow:0 0 0 3px rgba(27,110,62,.1)}
+.fg textarea{resize:vertical;min-height:100px}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media(max-width:500px){.fg-row{grid-template-columns:1fr}}
+.fsub{width:100%;padding:.9rem;border-radius:10px;background:linear-gradient(90deg,var(--G),var(--N2));color:#fff;font-family:'Outfit',sans-serif;font-weight:700;font-size:.95rem;border:none;cursor:pointer;transition:all .2s}
+.fsub:hover{opacity:.9;transform:translateY(-2px)}
+
+/* FOOTER */
+footer{background:var(--N);color:#fff;padding:4rem 1.5rem 2rem}
+.ft-top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:3rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.08);margin-bottom:2rem}
+@media(max-width:768px){.ft-top{grid-template-columns:1fr}}
+.ft-name{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:.5rem}
+.ft-name span{color:var(--O)}
+.ft-brand p{font-size:.84rem;color:rgba(255,255,255,.45);line-height:1.75;max-width:270px;margin-top:.5rem}
+.ft-soc{display:flex;gap:.7rem;margin-top:1.2rem}
+.ft-soc a{width:36px;height:36px;border-radius:8px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .2s}
+.ft-soc a:hover{background:var(--O);transform:translateY(-2px)}
+.ft-col h4{font-size:.75rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--O);margin-bottom:1rem}
+.ft-col ul{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.ft-col ul li a{font-size:.84rem;color:rgba(255,255,255,.45);transition:color .2s}
+.ft-col ul li a:hover{color:#fff}
+.ft-bot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.ft-bot p{font-size:.77rem;color:rgba(255,255,255,.28)}
+.ft-heart{color:var(--R)}
+
+/* MODAL */
+.moverlay{position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,.6);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1.5rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.moverlay.open{opacity:1;pointer-events:all}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:720px;max-height:85vh;overflow:hidden;display:flex;flex-direction:column;transform:scale(.94);transition:transform .3s;box-shadow:0 20px 80px rgba(0,0,0,.25)}
+.moverlay.open .modal{transform:scale(1)}
+.mhdr{display:flex;align-items:center;justify-content:space-between;padding:1.5rem 2rem;border-bottom:1px solid var(--BG2);background:linear-gradient(90deg,var(--G),var(--N2))}
+.mhdr h2{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:#fff}
+.mhdr small{font-size:.8rem;color:rgba(255,255,255,.65);margin-top:.1rem;display:block}
+.mcls{background:rgba(255,255,255,.15);color:#fff;border:none;width:34px;height:34px;border-radius:50%;font-size:1.1rem;cursor:pointer}
+.mcls:hover{background:rgba(255,255,255,.3)}
+.mbody{overflow-y:auto;padding:1.5rem 2rem;flex:1}
+.msrch{width:100%;padding:.7rem 1rem;border:2px solid var(--BG2);border-radius:10px;font-family:'Outfit',sans-serif;font-size:.9rem;outline:none;margin-bottom:1.2rem;transition:border .2s}
+.msrch:focus{border-color:var(--G)}
+.mtbl{overflow-x:auto}
+.modal table{font-size:.85rem}
+.modal thead th{background:var(--GP);color:var(--G);font-size:.72rem}
+.mfoot{padding:1rem 2rem;border-top:1px solid var(--BG2);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.mfoot p{font-size:.8rem;color:var(--TS)}
+.mexp{background:var(--G);color:#fff;font-size:.82rem;font-weight:600;padding:.5rem 1.1rem;border-radius:8px;border:none;cursor:pointer}
+.mexp:hover{background:var(--G2)}
+
+/* BTT */
+#btt{position:fixed;bottom:2rem;right:2rem;z-index:800;width:44px;height:44px;border-radius:50%;background:var(--O);color:var(--N);border:none;cursor:pointer;font-size:1.1rem;box-shadow:0 4px 18px rgba(232,160,32,.4);opacity:0;transform:translateY(20px);transition:all .3s}
+#btt.show{opacity:1;transform:translateY(0)}
+#btt:hover{background:var(--OL)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(28px,18px) scale(1.08)}}
+@keyframes rotateSlow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes shimmer{0%{background-position:0%}100%{background-position:200%}}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+@media(max-width:600px){.h-stats{gap:1.5rem}.mbr-srch{width:100%}.mbr-top{flex-direction:column;align-items:flex-start}}
+</style>
+</head>
+<body>
+
+<div class="mob" id="mob">
+  <button class="mob-x" onclick="closeMob()">✕</button>
+  <a href="#hero" onclick="closeMob()">Accueil</a>
+  <a href="#presentation" onclick="closeMob()">Présentation</a>
+  <a href="#structure" onclick="closeMob()">Structure</a>
+  <a href="#membres" onclick="closeMob()">Membres</a>
+  <a href="#projets" onclick="closeMob()">Projets</a>
+  <a href="#actualites" onclick="closeMob()">Actualités</a>
+  <a href="#paiement" onclick="closeMob()">Dons</a>
+  <a href="#galerie" onclick="closeMob()">Galerie</a>
+  <a href="#contact" onclick="closeMob()">Contact</a>
+</div>
+
+<nav id="nav">
+  <div class="nb">
+    <svg width="44" height="44" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="38" fill="#1B6E3E"/>
+      <circle cx="40" cy="40" r="38" fill="none" stroke="#E8A020" stroke-width="2.5"/>
+      <path d="M15 52 Q40 22 65 52" fill="none" stroke="#E8A020" stroke-width="2" stroke-linecap="round"/>
+      <line x1="40" y1="23" x2="40" y2="15" stroke="#E8A020" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="31" y1="27" x2="26" y2="19" stroke="#E8A020" stroke-width="1.5" stroke-linecap="round"/>
+      <line x1="49" y1="27" x2="54" y2="19" stroke="#E8A020" stroke-width="1.5" stroke-linecap="round"/>
+      <circle cx="40" cy="41" r="4" fill="#FDFAF4"/>
+      <line x1="40" y1="45" x2="40" y2="57" stroke="#FDFAF4" stroke-width="2.2" stroke-linecap="round"/>
+      <line x1="40" y1="49" x2="33" y2="44" stroke="#FDFAF4" stroke-width="2" stroke-linecap="round"/>
+      <line x1="40" y1="49" x2="47" y2="44" stroke="#FDFAF4" stroke-width="2" stroke-linecap="round"/>
+      <line x1="40" y1="57" x2="36" y2="64" stroke="#FDFAF4" stroke-width="2" stroke-linecap="round"/>
+      <line x1="40" y1="57" x2="44" y2="64" stroke="#FDFAF4" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <span class="nb-name">AJ<span>ESA</span></span>
+  </div>
+  <ul class="nm">
+    <li><a href="#presentation">Présentation</a></li>
+    <li><a href="#structure">Structure</a></li>
+    <li><a href="#membres">Membres</a></li>
+    <li><a href="#projets">Projets</a></li>
+    <li><a href="#actualites">Actualités</a></li>
+    <li><a href="#paiement">Dons</a></li>
+    <li><a href="#galerie">Galerie</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="n-cta">Rejoindre l'AJESA</a>
+  <button class="burger" onclick="toggleMob()"><span></span><span></span><span></span></button>
+</nav>
+
+<section id="hero">
+  <div class="orb oa"></div><div class="orb ob"></div><div class="orb oc"></div>
+  <div class="h-grid"></div>
+  <div class="hc">
+    <div class="h-pill">🌍 Amanikro · Daloa · Côte d'Ivoire</div>
+    <div class="h-logo">
+      <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="110" cy="110" r="105" fill="#1B6E3E"/>
+        <circle cx="110" cy="110" r="105" fill="none" stroke="#E8A020" stroke-width="6"/>
+        <path d="M38 142 Q110 52 182 142" fill="none" stroke="#E8A020" stroke-width="5" stroke-linecap="round"/>
+        <line x1="110" y1="57" x2="110" y2="37" stroke="#E8A020" stroke-width="3" stroke-linecap="round"/>
+        <line x1="83" y1="70" x2="71" y2="52" stroke="#E8A020" stroke-width="3" stroke-linecap="round"/>
+        <line x1="137" y1="70" x2="149" y2="52" stroke="#E8A020" stroke-width="3" stroke-linecap="round"/>
+        <line x1="64" y1="93" x2="49" y2="84" stroke="#E8A020" stroke-width="3" stroke-linecap="round"/>
+        <line x1="156" y1="93" x2="171" y2="84" stroke="#E8A020" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="110" cy="112" r="9" fill="#FDFAF4"/>
+        <line x1="110" y1="121" x2="110" y2="150" stroke="#FDFAF4" stroke-width="4.5" stroke-linecap="round"/>
+        <line x1="110" y1="128" x2="93" y2="118" stroke="#FDFAF4" stroke-width="4" stroke-linecap="round"/>
+        <line x1="110" y1="128" x2="127" y2="118" stroke="#FDFAF4" stroke-width="4" stroke-linecap="round"/>
+        <line x1="110" y1="150" x2="100" y2="165" stroke="#FDFAF4" stroke-width="4" stroke-linecap="round"/>
+        <line x1="110" y1="150" x2="120" y2="165" stroke="#FDFAF4" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="77" cy="118" r="8" fill="#FDFAF4"/>
+        <line x1="77" y1="126" x2="77" y2="153" stroke="#FDFAF4" stroke-width="4" stroke-linecap="round"/>
+        <line x1="77" y1="134" x2="62" y2="122" stroke="#FDFAF4" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="77" y1="134" x2="92" y2="124" stroke="#FDFAF4" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="77" y1="153" x2="68" y2="167" stroke="#FDFAF4" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="77" y1="153" x2="86" y2="167" stroke="#FDFAF4" stroke-width="3.5" stroke-linecap="round"/>
+        <circle cx="143" cy="118" r="8" fill="#FDFAF4"/>
+        <line x1="143" y1="126" x2="143" y2="153" stroke="#FDFAF4" stroke-width="4" stroke-linecap="round"/>
+        <line x1="143" y1="134" x2="128" y2="124" stroke="#FDFAF4" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="143" y1="134" x2="158" y2="122" stroke="#FDFAF4" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="143" y1="153" x2="134" y2="167" stroke="#FDFAF4" stroke-width="3.5" stroke-linecap="round"/>
+        <line x1="143" y1="153" x2="152" y2="167" stroke="#FDFAF4" stroke-width="3.5" stroke-linecap="round"/>
+        <text x="110" y="197" text-anchor="middle" font-family="serif" font-size="17" font-weight="bold" fill="#E8A020" letter-spacing="5">AJESA</text>
+        <line x1="56" y1="185" x2="76" y2="185" stroke="#E8A020" stroke-width="1.5"/>
+        <line x1="144" y1="185" x2="164" y2="185" stroke="#E8A020" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <h1 class="h-title">Association des Jeunes<br><span class="gold">Solidaires d'Amanikro</span></h1>
+    <p class="h-sub">Une jeunesse organisée, unie et fière — construisant ensemble l'avenir de notre communauté à Amanikro, Daloa. 🇨🇮</p>
+    <div class="h-btns">
+      <a href="#presentation" class="btn-p">🌿 Découvrir l'AJESA</a>
+      <a href="#contact" class="btn-o">💌 Nous rejoindre</a>
+    </div>
+    <div class="h-stats">
+      <div class="stat"><span class="sn" data-to="40">0</span><span class="sl">Membres</span></div>
+      <div class="stat"><span class="sn" data-to="6">0</span><span class="sl">Postes bureau</span></div>
+      <div class="stat"><span class="sn" data-to="5">0</span><span class="sl">Commissions</span></div>
+      <div class="stat"><span class="sn" data-to="6">0</span><span class="sl">Projets</span></div>
+    </div>
+  </div>
+  <div class="scroll-ind">Défiler</div>
+</section>
+
+<!-- PRÉSENTATION -->
+<section class="sec" id="presentation">
+  <div class="cont">
+    <div class="ab-grid">
+      <div class="revL">
+        <div class="ab-vis">
+          <svg viewBox="0 0 220 220" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="110" cy="110" r="105" fill="rgba(255,255,255,.08)"/>
+            <circle cx="110" cy="110" r="105" fill="none" stroke="rgba(232,160,32,.45)" stroke-width="4"/>
+            <path d="M38 142 Q110 52 182 142" fill="none" stroke="#E8A020" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="110" y1="57" x2="110" y2="37" stroke="#E8A020" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="83" y1="70" x2="71" y2="52" stroke="#E8A020" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="137" y1="70" x2="149" y2="52" stroke="#E8A020" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="110" cy="112" r="9" fill="#fff"/>
+            <line x1="110" y1="121" x2="110" y2="150" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+            <line x1="110" y1="128" x2="93" y2="118" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="110" y1="128" x2="127" y2="118" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="77" cy="118" r="7" fill="#fff"/>
+            <line x1="77" y1="125" x2="77" y2="150" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="77" y1="133" x2="62" y2="121" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <line x1="77" y1="133" x2="92" y2="123" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="143" cy="118" r="7" fill="#fff"/>
+            <line x1="143" y1="125" x2="143" y2="150" stroke="#fff" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="143" y1="133" x2="128" y2="123" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <line x1="143" y1="133" x2="158" y2="121" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+            <text x="110" y="197" text-anchor="middle" font-family="serif" font-size="15" font-weight="bold" fill="#E8A020" letter-spacing="4">AJESA</text>
+          </svg>
+          <div class="ab-vis-t">AJESA</div>
+          <div class="ab-vis-s">Association des Jeunes Solidaires d'Amanikro<br>🇨🇮 Amanikro · Daloa · Côte d'Ivoire</div>
+        </div>
+      </div>
+      <div class="revR">
+        <p class="lbl">Qui sommes-nous ?</p>
+        <h2 class="ttl">Notre mission &amp; nos <em style="color:var(--G);font-style:normal">valeurs</em></h2>
+        <p class="desc">L'AJESA est née de la volonté des jeunes d'Amanikro de s'organiser, de se former et d'agir ensemble pour le développement de leur communauté.</p>
+        <div class="val-list">
+          <div class="vi reveal d1"><div class="vi-ic">🎯</div><div><h4>Mission</h4><p>Rassembler, former et accompagner les jeunes d'Amanikro pour le développement social, culturel et économique du village.</p></div></div>
+          <div class="vi reveal d2"><div class="vi-ic">👁️</div><div><h4>Vision</h4><p>Faire d'AJESA un modèle d'association jeunesse dynamique, structurée et reconnue à l'échelle régionale et nationale.</p></div></div>
+          <div class="vi reveal d3"><div class="vi-ic">💎</div><div><h4>Valeurs</h4><p>Solidarité · Intégrité · Excellence · Engagement · Respect de nos traditions et ouverture sur l'avenir.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRUCTURE -->
+<section class="sec" id="structure">
+  <div class="cont">
+    <div class="reveal" style="margin-bottom:3rem">
+      <p class="lbl">Organigramme</p>
+      <h2 class="ttl" style="color:#fff">Notre <em style="color:var(--O);font-style:normal">bureau</em> officiel</h2>
+      <p class="desc" style="color:rgba(255,255,255,.55)">Des jeunes engagés et déterminés au service de toute la communauté d'Amanikro.</p>
+    </div>
+    <div class="bureau-grid">
+      <div class="bc reveal d1">
+        <div class="bc-av">👑</div>
+        <div class="bc-role">Président</div>
+        <div class="bc-name">Loukou Kouadio Thierry</div>
+        <div class="bc-info">Leadership &amp; représentation officielle</div>
+      </div>
+      <div class="bc reveal d2">
+        <div class="bc-av">📋</div>
+        <div class="bc-role">Secrétaire Général</div>
+        <div class="bc-name">Konan Koffi Marcelin</div>
+        <div class="bc-info">Administration, archives &amp; correspondance</div>
+      </div>
+      <div class="bc reveal d3">
+        <div class="bc-av">💰</div>
+        <div class="bc-role">Trésorier</div>
+        <div class="bc-name">Coulibaly Oba Florentin</div>
+        <div class="bc-info">Finances, cotisations &amp; budget</div>
+      </div>
+      <div class="bc reveal d4">
+        <div class="bc-av">🔍</div>
+        <div class="bc-role">Commissaire aux Comptes</div>
+        <div class="bc-name">Allou Henri Joël Kouakou</div>
+        <div class="bc-info">Contrôle, audit &amp; transparence financière</div>
+      </div>
+      <div class="bc reveal d4">
+        <div class="bc-av">🔍</div>
+        <div class="bc-role">Commissaire aux Comptes</div>
+        <div class="bc-name">N'dri Kouadio Romaric</div>
+        <div class="bc-info">Contrôle, audit &amp; transparence financière</div>
+      </div>
+      <div class="bc reveal d5">
+        <div class="bc-av">🎪</div>
+        <div class="bc-role">Chef d'Organisation</div>
+        <div class="bc-name">N'guessan Konan Denis</div>
+        <div class="bc-info">Événements, logistique &amp; mobilisation</div>
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="com-ttl">Commissions spécialisées</div>
+      <div class="com-grid">
+        <div class="cc"><div class="cc-ic">📚</div><div><h4>Éducation &amp; Formation</h4><p>Soutien scolaire, bourses, orientation, alphabétisation</p></div></div>
+        <div class="cc"><div class="cc-ic">⚽</div><div><h4>Sport &amp; Culture</h4><p>Tournois, fêtes traditionnelles, théâtre, musique</p></div></div>
+        <div class="cc"><div class="cc-ic">🌿</div><div><h4>Environnement</h4><p>Reboisement, salubrité, sensibilisation écologique</p></div></div>
+        <div class="cc"><div class="cc-ic">💼</div><div><h4>Économie &amp; Entrepreneuriat</h4><p>Micro-projets, AGR, formation professionnelle</p></div></div>
+        <div class="cc"><div class="cc-ic">❤️</div><div><h4>Action Sociale &amp; Santé</h4><p>Entraide, visites, solidarité &amp; santé communautaire</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MEMBRES -->
+<section class="sec" id="membres">
+  <div class="cont">
+    <div class="reveal" style="margin-bottom:2rem">
+      <p class="lbl">Nos membres</p>
+      <h2 class="ttl">La famille <em style="color:var(--G);font-style:normal">AJESA</em></h2>
+      <p class="desc">Membres engagés pour le développement d'Amanikro. Ensemble, nous sommes plus forts.</p>
+    </div>
+    <div class="mbr-top reveal">
+      <div style="display:flex;gap:.8rem;align-items:center;flex-wrap:wrap">
+        <span class="mbr-cnt" id="membreCount">40 membres</span>
+        <button class="mbr-btn" onclick="openModal()">📋 Liste complète</button>
+      </div>
+      <input class="mbr-srch" type="text" placeholder="🔍 Rechercher..." id="qSearch" oninput="qFilter()"/>
+    </div>
+    <div class="tbl-wrap reveal">
+      <table><thead><tr><th>#</th><th>Nom &amp; Prénoms</th><th>Poste / Fonction</th><th>Rôle</th><th>Statut</th></tr></thead>
+      <tbody id="prevBody"></tbody></table>
+    </div>
+    <div style="text-align:center;margin-top:1.5rem" class="reveal">
+      <button class="mbr-btn" onclick="openModal()">👥 Voir tous les membres →</button>
+    </div>
+  </div>
+</section>
+
+<!-- PROJETS -->
+<section class="sec" id="projets">
+  <div class="cont">
+    <div class="reveal" style="margin-bottom:3rem">
+      <p class="lbl">Nos projets</p>
+      <h2 class="ttl">Ce que nous <em style="color:var(--G);font-style:normal">construisons</em></h2>
+      <p class="desc">Des actions concrètes pour transformer Amanikro et améliorer le quotidien de nos habitants.</p>
+    </div>
+    <div class="proj-grid">
+      <div class="pc reveal d1"><div class="ph ph1"><div class="ph-ic">📚</div><div class="ph-deco"></div></div><div class="pb"><span class="ptag">Éducation</span><h3>Soutien scolaire communautaire</h3><p>Cours gratuits pour les enfants du village, fournitures scolaires et orientation des lycéens vers les filières d'avenir.</p><div class="pf"><span class="pst">En préparation</span></div></div></div>
+      <div class="pc reveal d2"><div class="ph ph2"><div class="ph-ic">🌿</div><div class="ph-deco"></div></div><div class="pb"><span class="ptag">Environnement</span><h3>Village propre &amp; vert</h3><p>Journées de salubrité mensuelles, plantation d'arbres et sensibilisation à la propreté d'Amanikro.</p><div class="pf"><span class="pst">En préparation</span></div></div></div>
+      <div class="pc reveal d3"><div class="ph ph3"><div class="ph-ic">⚽</div><div class="ph-deco"></div></div><div class="pb"><span class="ptag">Sport &amp; Culture</span><h3>Tournoi inter-quartiers AJESA</h3><p>Tournoi annuel de football pour renforcer la cohésion et valoriser les talents sportifs locaux d'Amanikro.</p><div class="pf"><span class="pst">En préparation</span></div></div></div>
+      <div class="pc reveal d1"><div class="ph ph4"><div class="ph-ic">💼</div><div class="ph-deco"></div></div><div class="pb"><span class="ptag">Économie</span><h3>Jardin collectif &amp; micro-agriculture</h3><p>Jardin communautaire pour créer des revenus collectifs et promouvoir l'agriculture locale à Amanikro.</p><div class="pf"><span class="pst">En préparation</span></div></div></div>
+      <div class="pc reveal d2"><div class="ph ph5"><div class="ph-ic">❤️</div><div class="ph-deco"></div></div><div class="pb"><span class="ptag">Action Sociale</span><h3>Caravane de solidarité</h3><p>Visite des personnes âgées, soutien aux familles en difficulté et collecte de dons communautaires.</p><div class="pf"><span class="pst">En préparation</span></div></div></div>
+      <div class="pc reveal d3"><div class="ph ph6"><div class="ph-ic">🚀</div><div class="ph-deco"></div></div><div class="pb"><span class="ptag">Lancement officiel</span><h3>Cérémonie de lancement AJESA</h3><p>Grand événement officiel avec les autorités locales, les membres fondateurs et toute la communauté d'Amanikro.</p><div class="pf"><span class="pst">À planifier</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+
+
+
+<!-- ACTUALITÉS -->
+<section class="sec" id="actualites" style="background:#f9f7f2">
+  <div class="cont">
+    <div class="reveal" style="margin-bottom:3rem;text-align:center">
+      <p class="lbl">Vie associative</p>
+      <h2 class="ttl">Nos <em style="color:var(--G);font-style:normal">Actualités</em></h2>
+      <p class="desc">Restez informés des dernières nouvelles et activités de l'AJESA à Amanikro.</p>
+    </div>
+
+    <!-- Bouton ajouter actualité -->
+    <div style="text-align:center;margin-bottom:2rem">
+      <button onclick="ouvrirFormulaireActu()" style="background:var(--G);color:#fff;font-weight:700;font-size:.9rem;padding:.8rem 2rem;border-radius:100px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:.6rem">
+        ✏️ Ajouter une actualité
+      </button>
+    </div>
+
+    <!-- Liste des actualités -->
+    <div id="listeActualites" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem">
+      <div style="grid-column:1/-1;text-align:center;padding:3rem;background:#fff;border-radius:18px;box-shadow:0 4px 20px rgba(0,0,0,.07)">
+        <div style="font-size:3rem;margin-bottom:1rem">📰</div>
+        <p style="color:#888;font-size:.95rem">Aucune actualité pour le moment.<br>Cliquez sur "Ajouter une actualité" pour publier.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL FORMULAIRE ACTUALITÉ -->
+<div id="modalActu" style="display:none;position:fixed;inset:0;z-index:1500;background:rgba(0,0,0,.5);align-items:center;justify-content:center;padding:1rem">
+  <div style="background:#fff;border-radius:20px;padding:2rem;width:100%;max-width:500px;max-height:90vh;overflow-y:auto">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+      <h3 style="color:var(--G);font-family:serif;font-size:1.3rem">✏️ Nouvelle actualité</h3>
+      <button onclick="fermerFormulaireActu()" style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#888">✕</button>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:1rem">
+      <div>
+        <label style="font-weight:600;font-size:.85rem;color:#555;display:block;margin-bottom:.4rem">Titre *</label>
+        <input id="actuTitre" type="text" placeholder="Ex: Réunion mensuelle de l'AJESA" style="width:100%;padding:.8rem;border:1px solid #ddd;border-radius:10px;font-size:.9rem;outline:none"/>
+      </div>
+
+      <div>
+        <label style="font-weight:600;font-size:.85rem;color:#555;display:block;margin-bottom:.4rem">Date *</label>
+        <input id="actuDate" type="date" style="width:100%;padding:.8rem;border:1px solid #ddd;border-radius:10px;font-size:.9rem;outline:none"/>
+      </div>
+
+      <div>
+        <label style="font-weight:600;font-size:.85rem;color:#555;display:block;margin-bottom:.4rem">Contenu *</label>
+        <textarea id="actuTexte" placeholder="Décrivez l'actualité..." rows="4" style="width:100%;padding:.8rem;border:1px solid #ddd;border-radius:10px;font-size:.9rem;outline:none;resize:vertical"></textarea>
+      </div>
+
+      <div>
+        <label style="font-weight:600;font-size:.85rem;color:#555;display:block;margin-bottom:.4rem">Photo (optionnel)</label>
+        <input id="actuPhoto" type="file" accept="image/*" style="width:100%;padding:.8rem;border:1px dashed #ddd;border-radius:10px;font-size:.85rem"/>
+      </div>
+
+      <button onclick="publierActualite()" style="background:var(--G);color:#fff;font-weight:700;padding:.9rem;border-radius:100px;border:none;cursor:pointer;font-size:.95rem;margin-top:.5rem">
+        📢 Publier l'actualité
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- DONS ET COTISATIONS -->
+<section class="sec" id="paiement" style="background:linear-gradient(135deg,#1B6E3E 0%,#0d4a28 100%)">
+  <div class="cont">
+    <div class="reveal" style="margin-bottom:3rem;text-align:center">
+      <p class="lbl" style="color:#E8A020">Soutenez-nous</p>
+      <h2 class="ttl" style="color:#fff">Dons &amp; <em style="color:#E8A020;font-style:normal">Cotisations</em></h2>
+      <p class="desc" style="color:rgba(255,255,255,.8)">Rejoignez et soutenez l'AJESA. Chaque contribution compte pour le développement d'Amanikro.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem;margin-bottom:2rem">
+
+      <!-- COTISATION -->
+      <div style="background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border-radius:20px;padding:2rem;border:1px solid rgba(255,255,255,.2);text-align:center">
+        <div style="font-size:2.5rem;margin-bottom:1rem">🤝</div>
+        <h3 style="color:#E8A020;font-size:1.3rem;margin-bottom:.5rem">Cotisation Membre</h3>
+        <div style="background:rgba(255,255,255,.1);border-radius:12px;padding:1rem;margin-bottom:1.5rem">
+          <p style="color:#fff;font-size:1.1rem;margin:.3rem 0"><strong>500 FCFA</strong> / mois</p>
+          <p style="color:#E8A020;font-size:1.1rem;margin:.3rem 0"><strong>6 000 FCFA</strong> / an</p>
+        </div>
+        <p style="color:rgba(255,255,255,.7);font-size:.85rem;margin-bottom:1.5rem">Envoyez votre cotisation via Orange Money ou Wave au numéro ci-dessous</p>
+        <div style="display:flex;flex-direction:column;gap:.8rem">
+          <a href="tel:+2250713121857" style="display:flex;align-items:center;justify-content:center;gap:.6rem;background:#FF6200;color:#fff;font-weight:700;padding:.9rem 1.5rem;border-radius:100px;text-decoration:none;font-size:.95rem">
+            🟠 Orange Money — 07 13 12 18 57
+          </a>
+          <a href="tel:+2250713121857" style="display:flex;align-items:center;justify-content:center;gap:.6rem;background:#1E88E5;color:#fff;font-weight:700;padding:.9rem 1.5rem;border-radius:100px;text-decoration:none;font-size:.95rem">
+            🌊 Wave — 07 13 12 18 57
+          </a>
+        </div>
+      </div>
+
+      <!-- DON LIBRE -->
+      <div style="background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border-radius:20px;padding:2rem;border:1px solid rgba(255,255,255,.2);text-align:center">
+        <div style="font-size:2.5rem;margin-bottom:1rem">💚</div>
+        <h3 style="color:#E8A020;font-size:1.3rem;margin-bottom:.5rem">Don Libre</h3>
+        <div style="background:rgba(255,255,255,.1);border-radius:12px;padding:1rem;margin-bottom:1.5rem">
+          <p style="color:#fff;font-size:.95rem;margin:.3rem 0">Soutenez nos projets communautaires</p>
+          <p style="color:rgba(255,255,255,.7);font-size:.82rem;margin:.3rem 0">Tout montant est le bienvenu !</p>
+        </div>
+        <p style="color:rgba(255,255,255,.7);font-size:.85rem;margin-bottom:1.5rem">Envoyez votre don via Orange Money ou Wave avec la mention <strong style="color:#E8A020">"Don AJESA"</strong></p>
+        <div style="display:flex;flex-direction:column;gap:.8rem">
+          <a href="tel:+2250713121857" style="display:flex;align-items:center;justify-content:center;gap:.6rem;background:#FF6200;color:#fff;font-weight:700;padding:.9rem 1.5rem;border-radius:100px;text-decoration:none;font-size:.95rem">
+            🟠 Orange Money — 07 13 12 18 57
+          </a>
+          <a href="tel:+2250713121857" style="display:flex;align-items:center;justify-content:center;gap:.6rem;background:#1E88E5;color:#fff;font-weight:700;padding:.9rem 1.5rem;border-radius:100px;text-decoration:none;font-size:.95rem">
+            🌊 Wave — 07 13 12 18 57
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Note importante -->
+    <div style="background:rgba(232,160,32,.15);border:1px solid #E8A020;border-radius:16px;padding:1.2rem;text-align:center">
+      <p style="color:#E8A020;font-weight:700;margin-bottom:.3rem">⚠️ Important</p>
+      <p style="color:rgba(255,255,255,.8);font-size:.88rem;margin:0">Après votre paiement, contactez-nous sur WhatsApp au <strong style="color:#fff">07 13 12 18 57</strong> avec votre nom complet et le motif du paiement pour confirmation.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- GALERIE ÉVÉNEMENTS -->
+<section class="sec" id="galerie" style="background:var(--BG)">
+  <div class="cont">
+    <div class="reveal" style="margin-bottom:3rem">
+      <p class="lbl">Nos événements</p>
+      <h2 class="ttl">Notre <em style="color:var(--G);font-style:normal">galerie</em> photos</h2>
+      <p class="desc">Moments forts et souvenirs de la vie associative de l'AJESA à Amanikro.</p>
+    </div>
+    <div id="galerieGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;margin-bottom:2rem">
+      <!-- Les photos s'affichent ici -->
+      <div style="grid-column:1/-1;text-align:center;padding:3rem;background:#fff;border-radius:18px;box-shadow:0 4px 20px rgba(0,0,0,.07)">
+        <div style="font-size:3rem;margin-bottom:1rem">📸</div>
+        <p style="color:var(--TS);font-size:.95rem">Les photos de vos événements apparaîtront ici.<br>Utilisez le bouton ci-dessous pour ajouter des images.</p>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <label for="photoUpload" style="display:inline-flex;align-items:center;gap:.6rem;background:var(--G);color:#fff;font-weight:700;font-size:.9rem;padding:.8rem 2rem;border-radius:100px;cursor:pointer;transition:all .2s" onmouseover="this.style.background='#155a31'" onmouseout="this.style.background='var(--G)'">
+        📷 Ajouter des photos d'événements
+      </label>
+      <input type="file" id="photoUpload" accept="image/*" multiple style="display:none" onchange="ajouterPhotos(this)"/>
+      <p style="font-size:.78rem;color:var(--TS);margin-top:.8rem">Formats acceptés : JPG, PNG, WEBP · Plusieurs photos à la fois</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="cont">
+    <div class="reveal" style="margin-bottom:3rem">
+      <p class="lbl">Contact &amp; Adhésion</p>
+      <h2 class="ttl">Rejoindre <em style="color:var(--G);font-style:normal">l'AJESA</em></h2>
+      <p class="desc">Vous êtes jeune d'Amanikro ou souhaitez soutenir notre association ? Contactez-nous directement !</p>
+    </div>
+    <div class="ct-grid">
+      <div class="ct-info revL">
+        <div class="cti">
+          <div class="cti-ic">📍</div>
+          <div><h4>Siège social</h4><p>Amanikro, Daloa — Côte d'Ivoire</p></div>
+        </div>
+        <div class="cti">
+          <div class="cti-ic wa">💬</div>
+          <div><h4>WhatsApp</h4><a href="https://wa.me/2250713121857" target="_blank">+225 07 13 12 18 57</a></div>
+        </div>
+        <div class="cti">
+          <div class="cti-ic em">✉️</div>
+          <div><h4>Email</h4><a href="mailto:ajesa.amanikro@gmail.com">ajesa.amanikro@gmail.com</a></div>
+        </div>
+        <div class="cti">
+          <div class="cti-ic fb">📘</div>
+          <div><h4>Facebook</h4><a href="https://www.facebook.com/profile.php?id=61589030535429" target="_blank">Page AJESA Officielle</a></div>
+        </div>
+        <div class="cti">
+          <div class="cti-ic tk">🎵</div>
+          <div><h4>TikTok</h4><p>Compte en cours de création</p><small><a href="https://www.facebook.com/profile.php?id=61589030535429" target="_blank" style="color:var(--G)">Voir la page Facebook</a></small></div>
+        </div>
+        <div class="soc-row">
+          <a href="https://wa.me/2250713121857" target="_blank" class="sb sb-wa">💬 WhatsApp</a>
+          <a href="mailto:ajesa.amanikro@gmail.com" class="sb sb-em">✉️ Email</a>
+          <a href="https://www.facebook.com/profile.php?id=61589030535429" target="_blank" class="sb sb-fb">📘 Facebook</a>
+        </div>
+      </div>
+      <div class="ct-form revR">
+        <h3>📩 Formulaire d'adhésion</h3>
+        <div class="fg-row">
+          <div class="fg"><label>Nom</label><input type="text" placeholder="Votre nom"/></div>
+          <div class="fg"><label>Prénoms</label><input type="text" placeholder="Vos prénoms"/></div>
+        </div>
+        <div class="fg"><label>Téléphone / WhatsApp</label><input type="tel" placeholder="+225 XX XX XX XX XX"/></div>
+        <div class="fg-row">
+          <div class="fg"><label>Âge</label><input type="number" placeholder="Âge" min="15" max="45"/></div>
+          <div class="fg"><label>Quartier</label><input type="text" placeholder="Votre quartier"/></div>
+        </div>
+        <div class="fg"><label>Commission souhaitée</label>
+          <select>
+            <option value="">Choisir une commission...</option>
+            <option>Éducation &amp; Formation</option>
+            <option>Sport &amp; Culture</option>
+            <option>Environnement</option>
+            <option>Économie &amp; Entrepreneuriat</option>
+            <option>Action Sociale &amp; Santé</option>
+          </select>
+        </div>
+        <div class="fg"><label>Motivation</label><textarea placeholder="Pourquoi souhaitez-vous rejoindre l'AJESA ?"></textarea></div>
+        <button class="fsub" onclick="submitForm(this)">🤝 Je rejoins l'AJESA !</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="cont">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <div class="ft-name">AJ<span>ESA</span></div>
+        <p>Association des Jeunes Solidaires d'Amanikro — Une jeunesse organisée, unie et fière de son village. Ensemble, nous construisons l'avenir. 🇨🇮</p>
+        <div class="ft-soc">
+          <a href="https://wa.me/2250713121857" title="WhatsApp" target="_blank">💬</a>
+          <a href="mailto:ajesa.amanikro@gmail.com" title="Email">✉️</a>
+          <a href="https://www.facebook.com/profile.php?id=61589030535429" title="Facebook" target="_blank">📘</a>
+          <a href="#" title="TikTok">🎵</a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#hero">Accueil</a></li>
+          <li><a href="#presentation">Présentation</a></li>
+          <li><a href="#structure">Structure</a></li>
+          <li><a href="#membres">Membres</a></li>
+          <li><a href="#projets">Projets</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h4>Le bureau</h4>
+        <ul>
+          <li><a href="#">👑 Loukou K. Thierry</a></li>
+          <li><a href="#">📋 Konan K. Marcelin</a></li>
+          <li><a href="#">💰 Coulibaly O. Florentin</a></li>
+          <li><a href="#">🔍 Allou H. J. Kouakou</a></li>
+          <li><a href="#">🔍 N'dri K. Romaric</a></li>
+          <li><a href="#">🎪 N'guessan K. Denis</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <p>© 2025 AJESA · Association des Jeunes Solidaires d'Amanikro · Daloa · Fait avec <span class="ft-heart">❤️</span></p>
+      <p>Amanikro · Daloa · Côte d'Ivoire 🇨🇮</p>
+    </div>
+  </div>
+</footer>
+
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- MODAL MEMBRES -->
+<div class="moverlay" id="moverlay" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="mhdr">
+      <div><h2>👥 Membres de l'AJESA</h2><small>Liste des membres — Ordre alphabétique</small></div>
+      <button class="mcls" onclick="closeModalBtn()">✕</button>
+    </div>
+    <div class="mbody">
+      <input class="msrch" type="text" placeholder="🔍 Rechercher un membre..." id="mSearch" oninput="filterModal()"/>
+      <div class="mtbl">
+        <table><thead><tr><th>#</th><th>Nom &amp; Prénoms</th><th>Poste / Fonction</th><th>Rôle</th><th>Statut</th></tr></thead>
+        <tbody id="mBody"></tbody></table>
+      </div>
+    </div>
+    <div class="mfoot">
+      <p id="mfcount">Membres enregistrés</p>
+      <button class="mexp" onclick="exportCSV()">📥 Exporter CSV</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ================================================
+// LISTE DES MEMBRES — triée alphabétiquement
+// ================================================
+const MEMBRES = [
+  {nom:"Adepo Wilfried", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Allou Henri Joel Kouakou", poste:"Commissaire aux Comptes", role:"Commissaire aux Comptes", statut:"Bureau"},
+  {nom:"Bohoussou Kouame Noel", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Coulibaly Oba Florentin", poste:"Tresorier", role:"Tresorier", statut:"Bureau"},
+  {nom:"Ganga Kouadio Elie", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"K. Amany Frejus", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"K. Kouame Guy Michael", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Konan Koffi Marcelin", poste:"Secretaire General", role:"Secretaire General", statut:"Bureau"},
+  {nom:"Kouadio Kouadio Dennis", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouadio Kouadio Jacob", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouadio Kouadio Romaric", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouadio Kouame Ferdinand", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouadio Kouakou Rodrique", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouadio Kouakou Frederic", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouakoulou Pour Noel", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouakou K. Aristide", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouakou Konan Dorgeles", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouakou Kouakou Joel", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouakou Kouassi Tubis", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouakou Yao Jonas", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouame Cedric", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouame Konan Cedric", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouame Konan Emmanuel", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouame Yao Franck", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Koukou Koffi Jetheme", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Loukou Konan Evariste", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Loukou Kouadio Anicet", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Loukou Kouadio Rodrigue", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Loukou Kouadio Thierry", poste:"President", role:"President", statut:"Bureau"},
+  {nom:"Ndri Koffi Innocent", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Ndri Kouadio Romaric", poste:"Commissaire aux Comptes", role:"Commissaire aux Comptes", statut:"Bureau"},
+  {nom:"Ndri Kouassi Anicet", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Ngbin Koffi Medard", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Nguessan Konan Denis", poste:"Chef d Organisation", role:"Chef d Organisation", statut:"Bureau"},
+  {nom:"Nguessan Konan Donald", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Nguessan Nguessan", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Kouadio Koffi Ruffin", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Koffi Romaric", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Yao Konan Henri", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Yao Kouassi Abel", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"Yao Koukou Frederic", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"},
+  {nom:"", poste:"", role:"Membre", statut:"Actif"}
+];
+
+function bdg(s){
+  if(s==="Bureau") return "badge b-fond";
+  return "badge b-actif";
+}
+
+function renderRows(data, tbodyId){
+  const tb = document.getElementById(tbodyId);
+  if(!tb) return;
+  tb.innerHTML = data.map((m,i)=>{
+    if(m.nom.trim()===""){
+      return "<tr style='background:#fafff8'>"
+        +"<td style='color:#bbb;font-size:.8rem'>"+(i+1)+"</td>"
+        +"<td><input type='text' placeholder='Nom & Prénoms' data-idx='"+i+"' data-field='nom' onchange='majMembre(this)' style='border:none;border-bottom:1px dashed #ccc;width:100%;font-size:.85rem;padding:2px 4px;background:transparent;outline:none'/></td>"
+        +"<td><input type='text' placeholder='Poste/Fonction' data-idx='"+i+"' data-field='poste' onchange='majMembre(this)' style='border:none;border-bottom:1px dashed #ccc;width:100%;font-size:.82rem;padding:2px 4px;background:transparent;outline:none'/></td>"
+        +"<td><input type='text' placeholder='Rôle' data-idx='"+i+"' data-field='role' onchange='majMembre(this)' style='border:none;border-bottom:1px dashed #ccc;width:100%;font-size:.82rem;padding:2px 4px;background:transparent;outline:none'/></td>"
+        +"<td><span class='badge b-actif' style='opacity:.3'>Actif</span></td>"
+        +"</tr>";
+    }
+    return "<tr>"
+      +"<td style='color:var(--TS);font-size:.8rem'>"+(i+1)+"</td>"
+      +"<td style='font-weight:600'>"+m.nom+"</td>"
+      +"<td style='font-size:.82rem;color:var(--G);font-weight:600'>"+(m.poste||"")+"</td>"
+      +"<td style='font-size:.82rem;color:var(--TS)'>"+m.role+"</td>"
+      +"<td><span class='"+bdg(m.statut)+"'>"+m.statut+"</span></td>"
+      +"</tr>";
+  }).join("");
+}
+
+function majMembre(el){
+  const idx = parseInt(el.dataset.idx);
+  const field = el.dataset.field;
+  MEMBRES[idx][field] = el.value;
+  updateCount();
+}
+
+function updateCount(){
+  const actifs = MEMBRES.filter(m=>m.nom.trim()!=="").length;
+  const el = document.getElementById("membreCount");
+  if(el) el.textContent = actifs + " membres";
+  const mf = document.getElementById("mfcount");
+  if(mf) mf.textContent = actifs + " membre(s) enregistre(s)";
+}
+
+const membresActifs = MEMBRES.filter(m=>m.nom.trim()!=="");
+document.getElementById("membreCount").textContent = membresActifs.length + " membres";
+renderRows(MEMBRES.slice(0,6), "prevBody");
+renderRows(MEMBRES, "mBody");
+document.getElementById("mfcount").textContent = membresActifs.length + " membre(s) enregistre(s)";
+
+function qFilter(){
+  const q=document.getElementById("qSearch").value.toLowerCase();
+  const f=MEMBRES.filter(m=>m.nom.trim()!==""&&(m.nom.toLowerCase().includes(q)||m.role.toLowerCase().includes(q)||(m.poste||"").toLowerCase().includes(q))).slice(0,6);
+  renderRows(f,"prevBody");
+}
+function filterModal(){
+  const q=document.getElementById("mSearch").value.toLowerCase();
+  if(q===""){renderRows(MEMBRES,"mBody");updateCount();return;}
+  const f=MEMBRES.filter(m=>m.nom.trim()!==""&&(m.nom.toLowerCase().includes(q)||m.role.toLowerCase().includes(q)||m.statut.toLowerCase().includes(q)||(m.poste||"").toLowerCase().includes(q)));
+  renderRows(f,"mBody");
+  document.getElementById("mfcount").textContent=f.length+" membre(s) trouve(s)";
+}
+function exportCSV(){
+  const rows=[["#","Nom & Prenoms","Poste / Fonction","Role","Statut"]];
+  MEMBRES.filter(m=>m.nom.trim()!=="").forEach((m,i)=>rows.push([i+1,m.nom,m.poste||"",m.role,m.statut]));
+  const csv=rows.map(r=>r.join(";")).join("\n");
+  const a=document.createElement("a");
+  a.href="data:text/csv;charset=utf-8,"+encodeURIComponent(csv);
+  a.download="AJESA_Membres.csv";
+  a.click();
+}
+function openModal(){ document.getElementById("moverlay").classList.add("open"); document.body.style.overflow="hidden"; }
+function closeModalBtn(){ document.getElementById("moverlay").classList.remove("open"); document.body.style.overflow=""; }
+function closeModal(e){ if(e.target===document.getElementById("moverlay")) closeModalBtn(); }
+
+const nav=document.getElementById("nav");
+window.addEventListener("scroll",()=>{
+  nav.classList.toggle("active",window.scrollY>60);
+  document.getElementById("btt").classList.toggle("show",window.scrollY>400);
+});
+function toggleMob(){ document.getElementById("mob").classList.toggle("open"); }
+function closeMob(){ document.getElementById("mob").classList.remove("open"); }
+
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("on"); });
+},{threshold:0.1});
+document.querySelectorAll(".reveal,.revL,.revR").forEach(el=>obs.observe(el));
+
+const cobs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      document.querySelectorAll(".sn").forEach(el=>{
+        const t=parseInt(el.dataset.to); let c=0;
+        const ti=setInterval(()=>{ c+=t/60; if(c>=t){el.textContent=t;clearInterval(ti);}else el.textContent=Math.floor(c); },18);
+      });
+      cobs.disconnect();
+    }
+  });
+},{threshold:.5});
+const hs=document.querySelector(".h-stats");
+if(hs) cobs.observe(hs);
+
+function submitForm(btn){
+  btn.textContent="✅ Demande reçue ! Merci de rejoindre l'AJESA !";
+  btn.style.background="linear-gradient(90deg,#1B6E3E,#2D9B5C)";
+  setTimeout(()=>{ btn.textContent="🤝 Je rejoins l'AJESA !"; btn.style.background=""; },4000);
+}
+
+// GALERIE PHOTOS
+let photosGalerie = [];
+function ajouterPhotos(input){
+  const files = Array.from(input.files);
+  files.forEach(file=>{
+    const reader = new FileReader();
+    reader.onload = e=>{
+      photosGalerie.push({src:e.target.result, nom:file.name, date: new Date().toLocaleDateString('fr-FR')});
+      afficherGalerie();
+    };
+    reader.readAsDataURL(file);
+  });
+}
+function afficherGalerie(){
+  const grid = document.getElementById("galerieGrid");
+  if(photosGalerie.length===0){
+    grid.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:3rem;background:#fff;border-radius:18px;box-shadow:0 4px 20px rgba(0,0,0,.07)"><div style="font-size:3rem;margin-bottom:1rem">📸</div><p style="color:var(--TS);font-size:.95rem">Les photos de vos événements apparaîtront ici.<br>Utilisez le bouton ci-dessous pour ajouter des images.</p></div>`;
+    return;
+  }
+  grid.innerHTML = photosGalerie.map((p,i)=>`
+    <div style="position:relative;border-radius:16px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.1);cursor:pointer;aspect-ratio:4/3" onclick="ouvrirPhoto(${i})">
+      <img src="${p.src}" style="width:100%;height:100%;object-fit:cover;transition:transform .3s" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"/>
+      <div style="position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,.6));padding:.8rem;color:#fff">
+        <p style="font-size:.78rem;margin:0">${p.date}</p>
+      </div>
+      <button onclick="event.stopPropagation();supprimerPhoto(${i})" style="position:absolute;top:.5rem;right:.5rem;background:rgba(255,0,0,.7);color:#fff;border:none;border-radius:50%;width:28px;height:28px;cursor:pointer;font-size:.8rem">✕</button>
+    </div>`).join("");
+}
+function ouvrirPhoto(i){
+  const p = photosGalerie[i];
+  const ov = document.createElement("div");
+  ov.style.cssText="position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.9);display:flex;align-items:center;justify-content:center;padding:1rem";
+  ov.innerHTML=`<img src="${p.src}" style="max-width:95vw;max-height:90vh;border-radius:12px;box-shadow:0 20px 80px rgba(0,0,0,.5)"/><button onclick="this.parentElement.remove()" style="position:absolute;top:1rem;right:1rem;background:rgba(255,255,255,.2);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:1.3rem;cursor:pointer">✕</button>`;
+  document.body.appendChild(ov);
+}
+function supprimerPhoto(i){
+  if(confirm("Supprimer cette photo ?")){ photosGalerie.splice(i,1); afficherGalerie(); }
+}
+
+
+// ACTUALITÉS
+let actualites = [];
+
+function ouvrirFormulaireActu(){
+  const modal = document.getElementById("modalActu");
+  modal.style.display = "flex";
+  // Date du jour par défaut
+  document.getElementById("actuDate").valueAsDate = new Date();
+}
+
+function fermerFormulaireActu(){
+  document.getElementById("modalActu").style.display = "none";
+  document.getElementById("actuTitre").value = "";
+  document.getElementById("actuTexte").value = "";
+  document.getElementById("actuPhoto").value = "";
+}
+
+function publierActualite(){
+  const titre = document.getElementById("actuTitre").value.trim();
+  const date = document.getElementById("actuDate").value;
+  const texte = document.getElementById("actuTexte").value.trim();
+  const photoInput = document.getElementById("actuPhoto");
+
+  if(!titre || !date || !texte){
+    alert("Veuillez remplir tous les champs obligatoires (*)");
+    return;
+  }
+
+  const dateFormat = new Date(date).toLocaleDateString("fr-FR", {day:"numeric", month:"long", year:"numeric"});
+
+  if(photoInput.files.length > 0){
+    const reader = new FileReader();
+    reader.onload = e => {
+      actualites.unshift({titre, date: dateFormat, texte, photo: e.target.result});
+      afficherActualites();
+      fermerFormulaireActu();
+    };
+    reader.readAsDataURL(photoInput.files[0]);
+  } else {
+    actualites.unshift({titre, date: dateFormat, texte, photo: null});
+    afficherActualites();
+    fermerFormulaireActu();
+  }
+}
+
+function afficherActualites(){
+  const liste = document.getElementById("listeActualites");
+  if(actualites.length === 0){
+    liste.innerHTML = "<div style='grid-column:1/-1;text-align:center;padding:3rem;background:#fff;border-radius:18px;box-shadow:0 4px 20px rgba(0,0,0,.07)'><div style='font-size:3rem;margin-bottom:1rem'>📰</div><p style='color:#888;font-size:.95rem'>Aucune actualité pour le moment.<br>Cliquez sur Ajouter une actualité pour publier.</p></div>";
+    return;
+  }
+  liste.innerHTML = actualites.map((a,i) => `
+    <div style="background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.08);transition:transform .3s" onmouseover="this.style.transform='translateY(-4px)'" onmouseout="this.style.transform='translateY(0)'">
+      ${a.photo ? `<img src="${a.photo}" style="width:100%;height:200px;object-fit:cover"/>` : `<div style="width:100%;height:80px;background:linear-gradient(135deg,var(--G),#0d4a28);display:flex;align-items:center;justify-content:center;font-size:2rem">📰</div>`}
+      <div style="padding:1.2rem">
+        <p style="font-size:.78rem;color:var(--O);font-weight:600;margin-bottom:.4rem">📅 ${a.date}</p>
+        <h3 style="font-family:serif;font-size:1.1rem;color:var(--G);margin-bottom:.6rem">${a.titre}</h3>
+        <p style="font-size:.88rem;color:#666;line-height:1.6">${a.texte}</p>
+        <div style="display:flex;gap:.5rem;margin-top:.8rem;flex-wrap:wrap">
+          <a href="https://wa.me/?text=${encodeURIComponent('📢 Nouvelle actualité AJESA : ' + a.titre + '%0A%0A' + a.texte + '%0A%0A🌐 Voir le site : https://ajesaamanikro.github.io/ajesa-site')}" target="_blank" style="background:#25D366;color:#fff;font-size:.78rem;padding:.4rem .8rem;border-radius:100px;text-decoration:none;display:inline-flex;align-items:center;gap:.3rem">💬 Partager sur WhatsApp</a>
+          <button onclick="supprimerActu(${i})" style="background:none;border:1px solid #ddd;color:#999;font-size:.78rem;padding:.4rem .8rem;border-radius:100px;cursor:pointer">🗑️ Supprimer</button>
+        </div>
+      </div>
+    </div>`).join("");
+}
+
+function supprimerActu(i){
+  if(confirm("Supprimer cette actualité ?")){
+    actualites.splice(i,1);
+    afficherActualites();
+  }
+}
+
+// Fermer modal en cliquant dehors
+document.getElementById("modalActu").addEventListener("click", function(e){
+  if(e.target === this) fermerFormulaireActu();
+});
+
+</script>
+</body>
+</html>
