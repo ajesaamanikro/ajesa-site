@@ -17,7 +17,7 @@
 
 ## 📋 À propos
 
-AJESA est une association dont la mission est de Rassembler, former et accompagner les jeunes d'Amanikro pour le développement social, culturel et économique de notr.
+AJESA est une association dont la mission est de Rassembler, former et accompagner les jeunes d'Amanikro pour le développement social, culturel et économique de notre communauté.
 
 Ce dépôt contient le code source du site officiel de l'association, servant de vitrine pour présenter nos activités, nos membres et nos projets.
 
